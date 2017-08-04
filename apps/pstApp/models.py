@@ -10,6 +10,18 @@ trayecto = (('1','1',),('2','2'),('3','3'),('4','4'))
 trimestre = (('I','I'),('II','II'),('III','III'),('IV','IV'))
 
 @python_2_unicode_compatible
+class universidad(models.Model):
+	nombre_universidad = models.CharField(max_length=100, null=False, blank=False)
+	logo = models.ImageField(upload_to='logosUniversidades/%Y/%m/%d', verbose_name='logosUniversidades')
+	rif = models.CharField(max_length=16, null=False, blank=False)
+	telefono = models.CharField(max_length=16, null=False, blank=False)
+	email_universidad = models.EmailField(max_length=100)
+	direccion = models.TextField(max_length=400)
+	
+	def __str__(self):
+		return '%i --> %s' % (self.id, self.nombre_universidad)
+
+@python_2_unicode_compatible
 class docentes(models.Model):
 	cedula = models.CharField(max_length=8, unique=True, primary_key=True)
 	nombre = models.CharField(max_length=40, null=False, blank=False)
@@ -18,6 +30,7 @@ class docentes(models.Model):
 	celular = models.CharField(max_length=13, blank=False)
 	correo = models.EmailField(max_length=100)
 	profesion = models.CharField(max_length=60, null=False, blank=False)
+	id_universidad = models.ForeignKey('universidad', null=True, blank=True)
 	
 	def __str__(self):
 		return '%s --> %s, %s' % (self.cedula, self.nombre, self.apellido)
