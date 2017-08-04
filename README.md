@@ -2,8 +2,8 @@
 Sistema de Evaluacion de Proyecto Sociotecnologico
 Lenguaje: Python 2.7.x
 Framework: Django 1.11.x
-Patron: MTV
-Fecha de inicio: 02-08-2017
+Patron: MTV.
+Fecha de inicio: 02-08-2017\n
 Autor: julio montaño (jjmoncar@gmail.com)
 
 Descripcion:
