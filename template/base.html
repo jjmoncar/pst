@@ -1,0 +1,28 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>{% block title %}{% endblock %}</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <script type="text/javascript" src='{% static "js/jquery-2.1.1.min.js" %}'></script>
+        {% include 'material/includes/material_css.html' %}
+        <link type="text/css" rel="stylesheet" href='{% static "css/materialize.clockpicker.css" %}' media="screen,projection" />
+		{% include 'material/includes/material_js.html' %}
+		<script src='{% static "js/materialize.clockpicker.js" %}'></script>
+		{% load material_form %} 
+    </head>
+    	<body>
+			{% block content_cabecera %}{% endblock %}
+			 
+    		{% block content %}
+				
+    		{% endblock %} 
+    		
+    		{% block footer %} 
+				<hr> 
+				<p>PST Copyright 2017.</p> 
+			{% endblock %}
+	</body>
+</html>
