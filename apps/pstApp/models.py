@@ -58,7 +58,21 @@ class grupo(models.Model):
 @python_2_unicode_compatible
 class proyecto(models.Model):
 	nombre_proy = models.TextField(max_length=300)
+	comunidad_institucion = models.TextField(max_length=200)
+	estado = models.CharField(max_length=30, null=False, blank=False)
+	ciudad = models.CharField(max_length=30, null=False, blank=False)
+	municipio = models.CharField(max_length=30, null=False, blank=False)
 	id_grupo = models.ForeignKey('grupo', null=True, blank=True)
 
 	def __str__(self):
 		return '%i' % (self.id)
+
+class avances(models.Model):
+	actividadrevisada = models.TextField(max_length=1200)
+	actividadasignada = models.TextField(max_length=1200)
+	observaciones = models.TextField(max_length=1200)
+	fechaproxentrega = models.DateField(null=False, blank=False)
+	id_proyecto = models.ForeignKey('proyecto',null=True, blank=True)
+	
+	def __str__(self):
+		return 'Avance: %i' % (self.id)
