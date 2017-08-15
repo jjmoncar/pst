@@ -1,0 +1,52 @@
+{% extends "template/base.html" %}
+
+{% block content %}
+{% include "template/menu.html" %}
+
+<h2>Datos de la Institución</h2>
+
+<a class="waves-effect waves-light btn" href="{% url 'nuevaUniversidad' %}"><i class="material-icons right">library_add</i>Agregar</a>
+
+{% if object_list %}
+<table class="responsive-table display">
+	<thead>
+		<tr>
+			<td>Universidad</td>
+			<td>R.I.F</td>
+			<td>Telefono</td>
+			<td>Email</td>
+			<td>Dirección</td>
+		</tr>
+	</thead>
+	<tbody>
+
+		{% for consultaUniversidad in object_list %}
+		<tr>
+			<td>{{ consultaUniversidad.nombre_universidad.upper }}</td>
+			<td>{{ consultaUniversidad.rif }}</td>
+			<td>{{ consultaUniversidad.telefono }}</td>
+			<td>{{ consultaUniversidad.email_universidad }}</td>
+			<td>{{ consultaUniversidad.direccion }}</td>
+			<td>
+				<a class="btn waves-effect waves-light" href="{% url 'universidadEditar' pk=consultaUniversidad.id %}"><i class="material-icons right">edit</i>Editar</a>
+			</td>
+		</tr>
+		{% endfor %}
+		{% else %}
+			<p><h2>No Existen Datos para Mostrar!</h2></p>
+		{% endif %}
+	</tbody>
+</table>
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+		<a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+		{% endif %}
+	</li>
+	<li>
+		{% if page_obj.has_next %}
+		<a href="?page={{ page_obj.next_page_number }}">Next</a>
+		{% endif %}
+	</li>
+</ul>
+{% endblock %}

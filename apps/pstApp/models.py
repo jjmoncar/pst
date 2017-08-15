@@ -8,6 +8,8 @@ from django.contrib.auth.models import User
 
 trayecto = (('1','1',),('2','2'),('3','3'),('4','4'))
 trimestre = (('I','I'),('II','II'),('III','III'),('IV','IV'))
+fase = (('I','Incio'),('II','Elaboracion'),('III','Construccion'),('IV','Transicion'))
+ponderacion = (('A','5'),('B','4'),('C','3'),('D','2'),('E','1'))
 
 @python_2_unicode_compatible
 class universidad(models.Model):
@@ -67,6 +69,7 @@ class proyecto(models.Model):
 	def __str__(self):
 		return '%i' % (self.id)
 
+@python_2_unicode_compatible
 class avances(models.Model):
 	actividadrevisada = models.TextField(max_length=1200)
 	actividadasignada = models.TextField(max_length=1200)
@@ -76,3 +79,29 @@ class avances(models.Model):
 	
 	def __str__(self):
 		return 'Avance: %i' % (self.id)
+
+@python_2_unicode_compatible
+class pregunta(models.Model):
+	fase = models.CharField(max_length=10, choices=fase)
+	Trayecto = models.CharField(max_length=4, choices=trayecto)
+	trimestre = models.CharField(max_length=4, choices=trimestre)
+	item = models.CharField(max_length=160, null=False, blank=False)
+	
+	def __str__(self):
+		return 'Id. Pregunta: %i' % (self.id)
+
+class evaluacionGrupal(models.Model):
+	puntos = models.CharField(max_length=4, choices=ponderacion)
+	id_preguntas = models.ForeignKey('pregunta', null=True, blank=True)
+	id_grupo = models.ForeignKey('grupo', null=True, blank=True)
+	
+	def __str__(self):
+		return 'Grupo: %i' % (self.id_grupo)
+
+class evaluacionIndividual(models.Model):
+	puntosIndividual = models.CharField(max_length=4, choices=ponderacion)
+	id_preguntas = models.ForeignKey('pregunta', null=True, blank=True)
+	id_estudiante = models.ForeignKey('estudiantes', null=True, blank=True)
+
+	def __str__(self):
+		return 'id. Estudiante: %i' % (self.id_estudiante)

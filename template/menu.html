@@ -1,0 +1,43 @@
+{% load staticfiles %}
+<script>
+	function Mensaje(){
+		alert('En Construccion!');
+	}
+</script>
+<ul id="dropdown1" class="dropdown-content">
+  <li><a href="#">Reporte 1</a></li>
+  <li><a href="#">Reporte 2</a></li>
+  <li><a href="#">Reporte 3</a></li>
+</ul>
+
+<ul id="dropdown2" class="dropdown-content">
+  <li><a href="#" target="_blank">Ayuda</a></li>
+  <li><a href="#">Licencia</a></li>
+  <li class="divider"></li>
+  <li><a href="{% url 'acercade' %}" target="_blank">A Cerca de</a></li>
+</ul>
+
+<ul id="dropdown3" class="dropdown-content">
+  <li><a href="{% url 'universidadListar' %}">Institución</a></li>
+  <li><a href="#">Docentes</a></li>
+  <li><a href="#">Estudiantes</a></li>
+  <li><a href="#">Preguntas (items)</a></li>
+</ul>
+
+<br>
+<nav>
+  <div class="nav-wrapper">
+    <a href="#!" class="brand-logo"><img src="{% static 'img/uptp.png' %}" height="64"></a>
+    <ul class="right hide-on-med-and-down">
+	  <li><a href="{% url 'principal' %}">Inicio</a></li>
+      <li><a class="dropdown-button" href="#!" data-activates="dropdown3">Configuración<i class="material-icons right">arrow_drop_down</i></a></li>
+      {% if user.is_authenticated and user.is_staff %}
+		<li><a href="/admin">Administrador</a></li>
+	  {% endif %}
+	  <li><a href="#">Realizar Evaluación</a></li>
+	  <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Reportes<i class="material-icons right">arrow_drop_down</i></a></li>
+	  <li><a class="dropdown-button" href="#!" data-activates="dropdown2">Ayuda<i class="material-icons right">arrow_drop_down</i></a></li>
+      <li><a href="#"></a></li>
+    </ul>
+  </div>
+</nav>

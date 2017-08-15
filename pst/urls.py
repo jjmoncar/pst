@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
-from apps.pstApp.views import principal, Inicio, AcercaDe
+from apps.pstApp.views import *
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import login, logout_then_login
 from django.conf import settings
@@ -28,4 +28,9 @@ urlpatterns = [
     url(r'^logout/', logout_then_login, name='logout'),
     url(r'^principal/', login_required(principal.as_view()), name='principal'),
     url(r'^acercade/', login_required(AcercaDe.as_view()), name='acercade'),
+    
+    #URLs Universidad
+    url(r'^nuevaUniversidad/', login_required(universidadCreate.as_view()), name='nuevaUniversidad'),
+    url(r'^universidadListar/', login_required(universidadListar.as_view()), name='universidadListar'),
+    url(r'^universidadEditar/(?P<pk>\d+)/', login_required(universidadEditar.as_view()), name='universidadEditar'),
 ]
