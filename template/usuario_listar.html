@@ -1,0 +1,54 @@
+{% extends "template/base.html" %}
+
+{% block content %}
+{% include "template/menu.html" %}
+
+<h2>Lista de Usuarios</h2>
+
+<a class="waves-effect waves-light btn" href="{% url 'registrarUsuario' %}"><i class="material-icons right">library_add</i>Agregar</a>
+
+{% if object_list %}
+
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<td>Usuario</td>
+			<td>Nombres</td>
+			<td>Apellidos</td>
+			<td>Profesión</td>
+			<td>Telefono</td>
+			<td>Correo</td>
+		</tr>
+	</thead>
+	<tbody>
+		{% for consultaUsuario in object_list %}
+		<tr>
+			<td>{{ consultaUsuario.usuario_id }}</td>
+			<td>{{ consultaUsuario.usuario_id.first_name.upper }}</td>
+			<td>{{ consultaUsuario.usuario_id.last_name.upper }}</td>
+			<td>{{ consultaUsuario.profesion }}</td>
+			<td>{{ consultaUsuario.celular }}</td>
+			<td>{{ consultaUsuario.usuario_id.email }}</td>
+			<td>
+				<a class="btn waves-effect waves-light" href="{% url 'usuarioEditar' pk=consultaUsuario.id %}"><i class="material-icons right">edit</i>Editar</a>
+			</td>
+		</tr>
+		{% endfor %}
+		{% else %}
+			<p><h2>No Existen Datos para Mostrar!</h2></p>
+		{% endif %}
+	</tbody>
+</table>
+<ul class="pager">
+	<li>
+		{% if page_obj.has_previous %}
+		<a href="?page={{ page_obj.previous_page_number }}">Previous</a>
+		{% endif %}
+	</li>
+	<li>
+		{% if page_obj.has_next %}
+		<a href="?page={{ page_obj.next_page_number }}">Next</a>
+		{% endif %}
+	</li>
+</ul>
+{% endblock %}

@@ -37,3 +37,42 @@ class universidadEditar(UpdateView):
 	template_name = 'template/universidad_form.html'
 	form_class = UniversidadForm
 	success_url = reverse_lazy('universidadListar')
+
+#VIEWS registro de Usuarios
+class RegistrarUsuario(CreateView):
+	model = User
+	template_name = 'template/registrarUsuario.html'
+	form_class = RegistroForm
+	second_form_class = DocenteForm
+	success_url = reverse_lazy('principal')
+	
+	def get_context_data(self, **kwargs):
+		context = super(RegistrarUsuario, self).get_context_data(**kwargs)
+		if 'form' not in context:
+			context['form'] = self.form_class(self.request.GET)
+		if 'form2' not in context:
+			context['form2'] = self.second_form_class(self.request.GET)
+		return context
+		
+	def post(self, request, *args, **kwargs):
+		self.object = self.get_object
+		form = self.form_class(request.POST)
+		form2 = self.second_form_class(request.POST)
+		if form.is_valid() and form2.is_valid():
+			usuario = form.save(commit=False)
+			usuario.perfil = form2.save()
+			usuario.save()
+			return HttpResponseRedirect(self.get_success_url())
+		else:
+			return self.render_to_response(self.get_context_data(form=form, form2=form2))
+	
+class usuario_list(ListView):
+	model = docentes
+	template_name = 'template/usuario_listar.html'
+	paginate_by = 4
+	
+class UsuarioUpdate(UpdateView):
+	model = User
+	template_name = 'template/registrarUsuario.html'
+	form_class = RegistroForm
+	success_url = reverse_lazy('principal')

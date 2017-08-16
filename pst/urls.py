@@ -33,4 +33,9 @@ urlpatterns = [
     url(r'^nuevaUniversidad/', login_required(universidadCreate.as_view()), name='nuevaUniversidad'),
     url(r'^universidadListar/', login_required(universidadListar.as_view()), name='universidadListar'),
     url(r'^universidadEditar/(?P<pk>\d+)/', login_required(universidadEditar.as_view()), name='universidadEditar'),
+    
+    #URLS Usuarios
+    url(r'^registrarUsuario/', login_required(RegistrarUsuario.as_view()), name='registrarUsuario'),
+    url(r'^usuarioListar/', login_required(usuario_list.as_view()), name='usuarioListar'),
+    url(r'^usuarioEditar/(?P<pk>\d+)/$', login_required(UsuarioUpdate.as_view()), name='usuarioEditar'),
 ]

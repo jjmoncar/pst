@@ -26,13 +26,11 @@ class universidad(models.Model):
 @python_2_unicode_compatible
 class docentes(models.Model):
 	cedula = models.CharField(max_length=8, unique=True, primary_key=True)
-	nombre = models.CharField(max_length=40, null=False, blank=False)
-	apellido = models.CharField(max_length=60, null=False, blank=False)
 	area_saber = models.CharField(max_length=60, null=False, blank=False)
 	celular = models.CharField(max_length=13, blank=False)
-	correo = models.EmailField(max_length=100)
 	profesion = models.CharField(max_length=60, null=False, blank=False)
 	id_universidad = models.ForeignKey('universidad', null=True, blank=True)
+	usuario_id = models.ForeignKey(User, null=True, blank=True)
 	
 	def __str__(self):
 		return '%s --> %s, %s' % (self.cedula, self.nombre, self.apellido)
