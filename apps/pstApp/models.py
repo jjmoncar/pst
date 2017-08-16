@@ -33,7 +33,7 @@ class docentes(models.Model):
 	usuario_id = models.ForeignKey(User, null=True, blank=True)
 	
 	def __str__(self):
-		return '%s --> %s, %s' % (self.cedula, self.nombre, self.apellido)
+		return '%s --> %s' % (self.cedula, self.profesion)
 
 @python_2_unicode_compatible	
 class estudiantes(models.Model):

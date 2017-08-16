@@ -30,7 +30,7 @@
 			<td>{{ consultaUsuario.celular }}</td>
 			<td>{{ consultaUsuario.usuario_id.email }}</td>
 			<td>
-				<a class="btn waves-effect waves-light" href="{% url 'usuarioEditar' pk=consultaUsuario.id %}"><i class="material-icons right">edit</i>Editar</a>
+				<a class="btn waves-effect waves-light" href="{% url 'usuarioEditar' pk=consultaUsuario.cedula %}"><i class="material-icons right">edit</i>Editar</a>
 			</td>
 		</tr>
 		{% endfor %}
